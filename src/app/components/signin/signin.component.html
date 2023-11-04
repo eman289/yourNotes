@@ -1,0 +1,91 @@
+<section class="py-4">
+  <div class="p-3 w-75 mx-auto">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <form [formGroup]="signInForm" (ngSubmit)="handleForm()">
+          <div class="form-floating mb-2">
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="email"
+              formControlName="email"
+              [class]="
+                signInForm.get('email')?.errors &&
+                (signInForm.get('email')?.touched ||
+                  signInForm.get('email')?.value.length > 0)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <label for="name">Email:</label>
+          </div>
+          <div
+            class="text-invalid"
+            *ngIf="
+              signInForm.get('email')?.errors &&
+              (signInForm.get('email')?.touched ||
+                signInForm.get('email')?.value.length > 0)
+            "
+          >
+            <p *ngIf="signInForm.get('email')?.getError('required')">
+              Please enter your email!
+            </p>
+            <p *ngIf="signInForm.get('email')?.getError('email')">
+              Invalid email!
+            </p>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="password"
+              formControlName="password"
+              [class]="
+                signInForm.get('password')?.errors &&
+                (signInForm.get('password')?.touched ||
+                  signInForm.get('password')?.value.length > 0)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <label for="name">Password:</label>
+          </div>
+          <div
+            class="text-invalid"
+            *ngIf="
+              signInForm.get('password')?.errors &&
+              (signInForm.get('password')?.touched ||
+                signInForm.get('password')?.value.length > 0)
+            "
+          >
+            <p *ngIf="signInForm.get('password')?.getError('required')">
+              Please enter your password!
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-main d-block mx-auto mb-3 mt-4"
+            [disabled]="signInForm.invalid"
+          >
+            Sign in
+            <i class="fa-solid fa-spinner fa-spin" *ngIf="isLoading"></i>
+          </button>
+          <p class="text-center text-muted">
+            Don't have an account?
+            <span role="button" class="text-main sign-btn" routerLink="/signup"
+              >Sign up</span
+            >
+          </p>
+        </form>
+      </div>
+      <div class="col-lg-6">
+        <div>
+          <img src="./assets/images/add-notes-2.svg" class="w-100" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

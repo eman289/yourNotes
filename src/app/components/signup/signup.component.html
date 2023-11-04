@@ -1,0 +1,181 @@
+<section class="py-4">
+  <div class="p-3 w-75 mx-auto">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <div>
+          <img src="./assets/images/add-notes.svg" class="w-100" alt="" />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <form [formGroup]="signUpForm" (ngSubmit)="handleForm()">
+          <div class="form-floating mb-2">
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder="name"
+              formControlName="name"
+              [class]="
+                signUpForm.get('name')?.errors &&
+                (signUpForm.get('name')?.touched ||
+                  signUpForm.get('name')?.value.length > 0)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <label for="name">Name:</label>
+          </div>
+          <div
+            class="text-invalid"
+            *ngIf="
+              signUpForm.get('name')?.errors &&
+              (signUpForm.get('name')?.touched ||
+                signUpForm.get('name')?.value.length > 0)
+            "
+          >
+            <p *ngIf="signUpForm.get('name')?.getError('required')">
+              Please enter your name!
+            </p>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="email"
+              formControlName="email"
+              [class]="
+                signUpForm.get('email')?.errors &&
+                (signUpForm.get('email')?.touched ||
+                  signUpForm.get('email')?.value.length > 0)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <label for="email">Email:</label>
+          </div>
+          <div
+            class="text-invalid"
+            *ngIf="
+              signUpForm.get('email')?.errors &&
+              (signUpForm.get('email')?.touched ||
+                signUpForm.get('email')?.value.length > 0)
+            "
+          >
+            <p *ngIf="signUpForm.get('email')?.getError('required')">
+              Please enter your email!
+            </p>
+            <p *ngIf="signUpForm.get('email')?.getError('email')">
+              Invalid email!
+            </p>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="password"
+              formControlName="password"
+              [class]="
+                signUpForm.get('password')?.errors &&
+                (signUpForm.get('password')?.touched ||
+                  signUpForm.get('password')?.value.length > 0)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <label for="password">Password:</label>
+          </div>
+          <div
+            class="text-invalid"
+            *ngIf="
+              signUpForm.get('password')?.errors &&
+              (signUpForm.get('password')?.touched ||
+                signUpForm.get('password')?.value.length > 0)
+            "
+          >
+            <p *ngIf="signUpForm.get('password')?.getError('required')">
+              Please enter your password!
+            </p>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="number"
+              id="age"
+              class="form-control"
+              placeholder="age"
+              formControlName="age"
+              [class]="
+                signUpForm.get('age')?.errors &&
+                (signUpForm.get('age')?.touched ||
+                  signUpForm.get('age')?.value.length > 0)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <label for="age">Age:</label>
+          </div>
+          <div
+            class="text-invalid"
+            *ngIf="
+              signUpForm.get('age')?.errors &&
+              (signUpForm.get('age')?.touched ||
+                signUpForm.get('age')?.value.length > 0)
+            "
+          >
+            <p *ngIf="signUpForm.get('age')?.getError('required')">
+              Please enter your age!
+            </p>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="tel"
+              id="phone"
+              class="form-control"
+              placeholder="phone"
+              formControlName="phone"
+              [class]="
+                signUpForm.get('phone')?.errors &&
+                (signUpForm.get('phone')?.touched ||
+                  signUpForm.get('phone')?.value.length > 0)
+                  ? 'is-invalid'
+                  : ''
+              "
+            />
+            <label for="phone">phone:</label>
+          </div>
+          <div
+            class="text-invalid"
+            *ngIf="
+              signUpForm.get('phone')?.errors &&
+              (signUpForm.get('phone')?.touched ||
+                signUpForm.get('phone')?.value.length > 0)
+            "
+          >
+            <p *ngIf="signUpForm.get('phone')?.getError('required')">
+              Please enter your phone!
+            </p>
+            <p *ngIf="signUpForm.get('phone')?.getError('pattern')">
+              Invalid phone number!
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-main d-block mx-auto mb-3 mt-4"
+            [disabled]="signUpForm.invalid"
+          >
+            Sign up
+            <i class="fa-solid fa-spinner fa-spin" *ngIf="isLoading"></i>
+          </button>
+          <p class="text-center text-muted">
+            Already have an account?
+            <span role="button" class="text-main sign-btn" routerLink="/signin"
+              >Sign in</span
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-sm shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" routerLink=""
+      ><img width="100" src="./assets/images/logo.png" alt="your Notes"
+    /></a>
+    <button
+      class="navbar-toggler d-lg-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="text-black"><i class="fa-solid fa-gear fa-spin"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/signup"
+            routerLinkActive="active-link"
+            >Sign up</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/signin"
+            routerLinkActive="active-link"
+            >Sign in</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

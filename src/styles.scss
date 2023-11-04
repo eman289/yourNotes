@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400&display=swap");
+
+$main-color: #1e4c47;
+$bg-main: #f8f6f4;
+
+.bg-mainColor {
+  background-color: $main-color;
+}
+
+.text-main {
+  color: $main-color;
+}
+
+.bg-main {
+  background-color: $bg-main;
+}
+
+.btn-main {
+  background-color: $main-color;
+  color: $bg-main;
+
+  &:hover {
+    background-color: #286961;
+    color: $bg-main;
+  }
+
+  &:disabled {
+    background-color: #1e4c47a2;
+    color: $bg-main;
+  }
+}
+
+body {
+  font-family: "Playpen Sans", cursive;
+  letter-spacing: 0.5px;
+  background-color: $bg-main;
+  color: $main-color;
+}
+
+::selection {
+  background-color: $main-color;
+  color: $bg-main;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $bg-main;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $main-color;
+  background: -webkit-linear-gradient(to bottom, #1e4c47 0%, #f8f6f4 100%);
+  background: -moz-linear-gradient(to bottom, #1e4c47 0%, #f8f6f4 100%);
+  background: linear-gradient(to bottom, #1e4c47 0%, #f8f6f4 100%);
+  border-radius: 100vh;
+}
+
+.form-control {
+  &:focus {
+    border-color: #286961;
+    box-shadow: 0 0 0 0.25rem rgba(31, 77, 70, 0.25);
+  }
+}
+
+.input-group-text {
+  background-color: #d2e9e9;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+  background-color: $main-color !important;
+}
+
+.swal2-actions {
+  gap: 10px;
+}
+
+.text-invalid {
+  margin-left: 0.5rem;
+  font-size: 0.8em;
+  color: var(--bs-form-invalid-color);
+  font-weight: bold;
+}
+
+.nav-link:focus {
+  color: $main-color;
+}
+.active-link {
+  color: $main-color;
+  font-weight: bold;
+}
+
+.sign-btn {
+  transition: color 300ms ease-in-out;
+  &:hover {
+    color: #209186;
+  }
+}
+
+.navbar {
+  background-color: #d2e9e9 !important;
+}
+
+footer {
+  background-color: #d2e9e9;
+}
+
+.navbar-toggler {
+  padding-block: 5px;
+  &:focus {
+    box-shadow: none;
+
+    i {
+      color: $main-color;
+    }
+  }
+}
+
+@media screen and (max-width: 532px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .navbar img {
+    width: 80px;
+  }
+}
+
+@media screen and (max-width: 358px) {
+  :root {
+    font-size: 11px;
+  }
+
+  .navbar img {
+    width: 75px;
+  }
+}

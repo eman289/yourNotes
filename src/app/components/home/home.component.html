@@ -1,0 +1,271 @@
+<main>
+  <section class="py-5">
+    <div class="noNotes text-center p-4 mx-auto" *ngIf="isEmpty">
+      <img src="./assets/images/no-notes.svg" class="w-100" alt="no notes" />
+      <h4 class="mt-2">No notes yet!</h4>
+    </div>
+    <div class="input-group searchInput w-75 mx-auto mb-5" *ngIf="!isEmpty">
+      <span class="input-group-text"
+        ><i class="fa-solid fa-magnifying-glass text-main"></i
+      ></span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search for note..."
+        [(ngModel)]="inputTerm"
+      />
+    </div>
+    <div
+      class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5"
+      *ngIf="!isEmpty"
+    >
+      <div class="col" *ngFor="let note of notes | search : inputTerm">
+        <div
+          class="card rounded-1 shadow-sm"
+          [style.background-color]="note.color"
+        >
+          <div class="card-header" #cardHeader>
+            <h5
+              class="card-title small mb-0"
+              [innerHTML]="note.title | highlight : inputTerm"
+            >
+              {{ note.title }}
+            </h5>
+            <div class="dropdown setting">
+              <a
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                title="settings"
+                ><i class="fa-solid fa-ellipsis-vertical text-main"></i
+              ></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <!-- Button trigger modal-2 -->
+                  <button
+                    class="dropdown-item"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal2"
+                    (click)="getNoteId(note._id)"
+                  >
+                    Edit
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class="dropdown-item"
+                    type="button"
+                    (click)="deleteNote(note._id)"
+                  >
+                    Delete
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dropdown palette me-1">
+              <i
+                class="fa-solid fa-palette"
+                role="button"
+                title="background color"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></i>
+              <ul class="dropdown-menu">
+                <li>
+                  <div class="dropdown-item list-unstyled">
+                    <span
+                      role="button"
+                      title="Default"
+                      class="default"
+                      [class.selected]="note.color === '#fff'"
+                      (click)="setCardBackgroundColor(note, '#fff')"
+                    ></span>
+
+                    <span
+                      role="button"
+                      title="Thistle"
+                      class="Thistle"
+                      [class.selected]="note.color === '#d3bfdb'"
+                      (click)="setCardBackgroundColor(note, '#d3bfdb')"
+                    ></span>
+
+                    <span
+                      role="button"
+                      title="Nyanza"
+                      class="Nyanza"
+                      [class.selected]="note.color === '#e2f6d3'"
+                      (click)="setCardBackgroundColor(note, '#e2f6d3')"
+                    ></span>
+
+                    <span
+                      role="button"
+                      title="White Coffee"
+                      class="WhiteCoffee"
+                      [class.selected]="note.color === '#eae0da'"
+                      (click)="setCardBackgroundColor(note, '#eae0da')"
+                    ></span>
+
+                    <span
+                      role="button"
+                      title="Crystal"
+                      class="Crystal"
+                      [class.selected]="note.color === '#b4ddd3'"
+                      (click)="setCardBackgroundColor(note, '#b4ddd3')"
+                    ></span>
+
+                    <span
+                      role="button"
+                      title="Champagne Pink"
+                      class="ChampagnePink"
+                      [class.selected]="note.color === '#f2d1d1'"
+                      (click)="setCardBackgroundColor(note, '#f2d1d1')"
+                    ></span>
+
+                    <span
+                      role="button"
+                      title="Azureish White"
+                      class="AzureishWhite"
+                      [class.selected]="note.color === '#daeaf1'"
+                      (click)="setCardBackgroundColor(note, '#daeaf1')"
+                    ></span>
+
+                    <span
+                      role="button"
+                      title="Pale Yellow"
+                      class="PaleYellow"
+                      [class.selected]="note.color === '#fff8b8'"
+                      (click)="setCardBackgroundColor(note, '#fff8b8')"
+                    ></span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-body p-2" #cardBody>
+            <p
+              class="card-text"
+              [innerHTML]="note.content | highlight : inputTerm"
+            >
+              {{ note.content }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Button trigger modal-1(add) -->
+    <span
+      title="Add note"
+      class="addNote bg-mainColor p-3 rounded-circle"
+      role="button"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal1"
+      ><i class="fa-solid fa-pencil"></i
+    ></span>
+    <!-- Modal-1(add) -->
+    <div
+      class="modal fade"
+      id="exampleModal1"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <form
+          class="modal-content"
+          [formGroup]="noteForm"
+          (ngSubmit)="addNote()"
+        >
+          <div class="modal-header">
+            <input
+              formControlName="title"
+              class="modal-title fs-6 form-control"
+              id="exampleModalLabel"
+              placeholder="Title ..."
+            />
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <textarea
+              formControlName="content"
+              class="form-control"
+              placeholder="Note ..."
+              cols="30"
+              rows="5"
+            ></textarea>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-main" data-bs-dismiss="modal">
+              Add note
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Modal-2(update) -->
+    <div
+      class="modal fade"
+      id="exampleModal2"
+      tabindex="-1"
+      aria-labelledby="exampleModal2Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <form
+          class="modal-content"
+          [formGroup]="updateForm"
+          (ngSubmit)="updateNote()"
+        >
+          <div class="modal-header">
+            <input
+              formControlName="title"
+              class="modal-title fs-6 form-control"
+              id="exampleModal2Label"
+              placeholder="Title ..."
+            />
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <textarea
+              formControlName="content"
+              class="form-control"
+              placeholder="Note ..."
+              cols="30"
+              rows="5"
+            ></textarea>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-main" data-bs-dismiss="modal">
+              Edit note
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
