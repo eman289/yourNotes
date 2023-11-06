@@ -80,6 +80,10 @@
       overflow-y: auto;
     }
   }
+
+  .card-text {
+    white-space: pre-line;
+  }
 }
 
 .addNote {

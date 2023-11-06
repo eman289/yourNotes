@@ -123,6 +123,11 @@ export class HomeComponent implements OnInit {
         if (result.isConfirmed) {
           this._NotesService.deleteNote(id).subscribe({
             next: (response) => {
+              swalWithBootstrapButtons.fire(
+                '',
+                'Your note has been deleted.',
+                'success'
+              );
               this.getNotes();
               localStorage.removeItem(`noteColor_${id}`);
               if (this.notes.length == 0) {
@@ -133,11 +138,6 @@ export class HomeComponent implements OnInit {
               Swal.fire('', err.error.msg, 'error');
             },
           });
-          swalWithBootstrapButtons.fire(
-            '',
-            'Your note has been deleted.',
-            'success'
-          );
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire('', 'Your note is safe :)', 'error');
         }
